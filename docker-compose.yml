@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  nginxproxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  app-frontend:
+    image: node:21.7.3
+    command: npx nx dev app
+    container_name: app-frontend
+    ports:
+      - 3000:3000
+    environment:
+      HOST_NAME: app.adesso.localhost
+      API_TOKEN: 566f77f630e358ed9d14dfe2b0eb3d7e2b3ba7881e0e017fd256fba338895ce7
+    working_dir: /ws
+    volumes:
+      - ./:/ws
+
+  backoffice-frontend:
+    image: node:21.7.3
+    command: npx nx dev backoffice
+    container_name: backoffice-frontend
+    ports:
+      - 3001:3000
+    environment:
+      HOST_NAME: backoffice.adesso.localhost
+      API_TOKEN: 566f77f630e358ed9d14dfe2b0eb3d7e2b3ba7881e0e017fd256fba338895ce7
+    working_dir: /ws
+    volumes:
+      - ./:/ws
