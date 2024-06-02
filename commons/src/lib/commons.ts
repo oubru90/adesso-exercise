@@ -2,10 +2,13 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { User } from "./interfaces";
+import exp = require("constants");
 
 const secretKey = process.env.JWT_SECRET;
 const sessionDuration = 5 * 24 * 60 * 60 * 1000; // 4 hours
 const key = new TextEncoder().encode(secretKey);
+
+const defaultLanguage = "en";
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
@@ -37,7 +40,6 @@ export async function logout() {
 }
 
 export async function getSession() {
-  console.log("getSession");
   const session = cookies().get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
@@ -62,4 +64,29 @@ export async function updateSession(request: NextRequest) {
   } catch (error) {
     return Response.redirect(new URL('/login', request.url));
   }
+}
+
+export async function detectUserLanguage(request: NextRequest) {
+  const lang = cookies().get("lang")?.value;
+  if (!lang) {
+    const acceptLanguage = request.headers.get("Accept-Language");
+    let language = defaultLanguage;
+    if (acceptLanguage) {
+      language = acceptLanguage.split("-")[0];
+    }
+    const res = NextResponse.next();
+    res.cookies.set({
+      name: "lang",
+      value: language,
+      httpOnly: true,
+      expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+    });
+    return language;
+  } else {
+    return lang
+  }
+}
+
+export async function changeUserLanguage(language: string) {
+  cookies().set("lang", language, { expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) });
 }

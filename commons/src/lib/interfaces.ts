@@ -1,19 +1,20 @@
 export interface User {
-  id: number;
-  email: string;
-  name: string;
-  gender: string;
+  id: number
+  email: string
+  name: string
+  gender: string
 }
 
 export interface Post {
-  id: number;
-  userId: number;
-  title: string;
-  body: string;
-  user: User;
+  id: number
+  userId: number
+  title: string
+  body: string
+  user: User
   comments: {
-    totalCount: number;
-  };
+    nodes: Comment[]
+    totalCount: number
+  }
 }
 
 export interface PostListsResponse {
@@ -28,4 +29,18 @@ export interface PostListsResponse {
       nodes: Post[]
     };
   };
+}
+
+export interface PostDetailsResponse {
+  post: Post
+}
+
+
+export interface Comment {
+  body: string
+  email: string
+  id: number
+  name: string
+  post: Post
+  postId: number
 }

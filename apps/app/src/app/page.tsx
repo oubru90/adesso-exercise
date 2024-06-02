@@ -21,7 +21,6 @@ export default async function Index() {
         <UserPostsList
           posts={posts.user.posts.nodes}
         />
-
       </Col>
     </Row>
   );

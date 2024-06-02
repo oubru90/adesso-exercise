@@ -1,0 +1,22 @@
+{
+  "header": {
+    "profie": "Profile",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Login",
+    "userID": "User ID",
+    "password": "Password",
+    "register": "Register",
+    "login": "Login"
+  },
+  "register": {
+    "title": "Register",
+    "name": "Name",
+    "email": "Email",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "register": "Register"
+  }
+}

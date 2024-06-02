@@ -9,8 +9,11 @@ import createPostMutation from './graphql/createPostMutation';
 import { LoginFieldType } from '../app/login/page';
 import getUserQuery from './graphql/getUserQuery';
 import deletePostMutation from './graphql/deletePostMutation';
+import { EditProfileFieldType } from '../_components/EditProfileForm';
+import updateUserMutation from './graphql/updateUserMutation';
+import deleteUserMutation from './graphql/deleteUserMutation';
 
-export async function loginUser(_, formData: LoginFieldType) {
+export async function loginUser(_: any, formData: LoginFieldType) {
   try {
     const user = await doGoRestRequest(
       getUserQuery,
@@ -27,7 +30,7 @@ export async function loginUser(_, formData: LoginFieldType) {
   }
 };
 
-export async function register(_, formData: RegisterFieldType) {
+export async function register(_: any, formData: RegisterFieldType) {
   try {
     const newUser = await doGoRestRequest(
       createUserMutation,
@@ -45,7 +48,7 @@ export async function register(_, formData: RegisterFieldType) {
   }
 }
 
-export async function createNewPost(_, formData: NewPostFieldType) {
+export async function createNewPost(_: any, formData: NewPostFieldType) {
   try {
     await doGoRestRequest(
       createPostMutation,
@@ -61,11 +64,11 @@ export async function createNewPost(_, formData: NewPostFieldType) {
 }
 
 export async function logoutUser() {
-  logout();
+  await logout();
   redirect('/');
 }
 
-export async function deletePost(_, postId: number) {
+export async function deletePost(_: any, postId: number) {
   await doGoRestRequest(
     deletePostMutation,
     {
@@ -74,4 +77,29 @@ export async function deletePost(_, postId: number) {
       }
     });
   redirect('/');
+}
+
+export async function deleteAccount(_: any, userId: number) {
+  await doGoRestRequest(
+    deleteUserMutation,
+    {
+      input: {
+        id: userId
+      }
+    });
+  await logout();
+  redirect('/');
+}
+
+export async function editProfile(_: any, formData: EditProfileFieldType) {
+  const resp = await doGoRestRequest(
+    updateUserMutation,
+    {
+      input: {
+        ...formData,
+        id: parseInt(formData.id, 10)
+      }
+    });
+  console.log(resp)
+  redirect('/profile');
 }

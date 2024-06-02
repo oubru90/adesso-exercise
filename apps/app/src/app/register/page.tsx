@@ -9,6 +9,7 @@ import RadioButton from 'antd/lib/radio/radioButton';
 import Title from 'antd/lib/typography/Title';
 
 import { register } from '../../lib/actions';
+import { getDictionary } from '../dictionaries';
 
 export type RegisterFieldType = {
   email?: string;
@@ -23,7 +24,7 @@ export default function Register() {
   return (
     <Flex align={"center"} flex={1}>
       <Row style={{ width: "100%" }}>
-        <Col span={12} offset={6} >
+        <Col xs={{ span: 20, offset: 2 }} md={{ span: 12, offset: 6 }}>
           <Card>
             <Title level={2}>Register</Title>
             {errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null}

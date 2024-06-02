@@ -4,6 +4,7 @@ const getUserQuery = `
       id
       name
       email
+      gender
       status
     }
   }

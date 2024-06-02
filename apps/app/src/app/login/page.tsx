@@ -21,7 +21,7 @@ export default function Login() {
   return (
     <Flex align={"center"} flex={1}>
       <Row style={{ width: "100%" }}>
-        <Col span={12} offset={6} >
+        <Col xs={{ span: 20, offset: 2 }} md={{ span: 12, offset: 6 }}>
           <Card>
             <Title level={2}>Login</Title>
             {errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null}

@@ -1,16 +1,22 @@
 'use client';
 
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Form } from "antd";
+import { Button, Form, Popconfirm } from "antd";
 import { deletePost } from "../lib/actions";
 import { useFormState, useFormStatus } from "react-dom";
 
 export default function DeletePostButton({ id }: { id: number }) {
-  const [errorMessage, dispatch] = useFormState(deletePost, undefined)
-  const { pending } = useFormStatus();
+  const [errorMessage, dispatch] = useFormState(deletePost, undefined);
 
   return (
-    <Form onFinish={() => dispatch(id)}>
+    <Popconfirm
+      title="Delete the post"
+      description="Are you sure to delete this post?"
+      onConfirm={() => dispatch(id)}
+      onCancel={() => console.log('cancel')}
+      okText="Yes"
+      cancelText="No"
+    >
       <Button
         htmlType="submit"
         type="text"
@@ -18,6 +24,6 @@ export default function DeletePostButton({ id }: { id: number }) {
       >
         Delete
       </Button>
-    </Form>
+    </Popconfirm>
   )
 }
