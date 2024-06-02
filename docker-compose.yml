@@ -21,6 +21,8 @@ services:
     working_dir: /ws
     volumes:
       - ./:/ws
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   backoffice-frontend:
     image: node:21.7.3
@@ -35,3 +37,5 @@ services:
     working_dir: /ws
     volumes:
       - ./:/ws
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"

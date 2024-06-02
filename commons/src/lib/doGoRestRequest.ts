@@ -3,7 +3,7 @@ interface GraphQLResponse {
   errors: Error[];
 }
 
-const doGoRestRequest = async (query: string, variables: any, apiKey: string) => {
+const doGoRestRequest = async (query: string, variables: any) => {
   const requestBody = {
     query,
     variables
@@ -12,12 +12,12 @@ const doGoRestRequest = async (query: string, variables: any, apiKey: string) =>
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${process.env.API_TOKEN}`,
     },
     body: JSON.stringify(requestBody)
   });
   const gqlResponse: GraphQLResponse = await response.json();
-  if(gqlResponse.errors && gqlResponse.errors.length > 0) {
+  if (gqlResponse.errors && gqlResponse.errors.length > 0) {
     throw new Error(JSON.stringify(gqlResponse.errors));
   }
 

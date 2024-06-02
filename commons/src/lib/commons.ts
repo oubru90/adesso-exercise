@@ -4,13 +4,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { User } from "./interfaces";
 
 const secretKey = process.env.JWT_SECRET;
+const sessionDuration = 5 * 24 * 60 * 60 * 1000; // 4 hours
 const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("5 days from now")
     .sign(key);
 }
 
@@ -23,7 +24,7 @@ export async function decrypt(input: string): Promise<any> {
 
 export async function login(user: User) {
   // Create the session
-  const expires = new Date(Date.now() + 10 * 1000);
+  const expires = new Date(Date.now() + sessionDuration);
   const session = await encrypt({ user, expires });
 
   // Save the session in a cookie
@@ -36,6 +37,7 @@ export async function logout() {
 }
 
 export async function getSession() {
+  console.log("getSession");
   const session = cookies().get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
@@ -44,11 +46,11 @@ export async function getSession() {
 export async function updateSession(request: NextRequest) {
   const session = cookies().get("session")?.value;
   if (!session) {
-    return Response.redirect(new URL('/register', request.url))
+    return Response.redirect(new URL('/login', request.url))
   }
   try {
     const parsed = await decrypt(session);
-    parsed.expires = new Date(Date.now() + 10 * 1000);
+    parsed.expires = new Date(Date.now() + sessionDuration);
     const res = NextResponse.next();
     res.cookies.set({
       name: "session",
@@ -58,6 +60,6 @@ export async function updateSession(request: NextRequest) {
     });
     return res;
   } catch (error) {
-    return Response.redirect(new URL('/register', request.url))
+    return Response.redirect(new URL('/login', request.url));
   }
 }

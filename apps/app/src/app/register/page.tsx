@@ -30,7 +30,7 @@ export default function Register() {
             <Form
               disabled={pending}
               layout="vertical"
-              name="login"
+              name="register"
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
               style={{ maxWidth: 600 }}
