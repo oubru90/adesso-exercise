@@ -17,6 +17,7 @@ services:
     environment:
       HOST_NAME: app.adesso.localhost
       API_TOKEN: 566f77f630e358ed9d14dfe2b0eb3d7e2b3ba7881e0e017fd256fba338895ce7
+      JWT_SECRET: ADESSO_JWT_SECRET_APP
     working_dir: /ws
     volumes:
       - ./:/ws
@@ -30,6 +31,7 @@ services:
     environment:
       HOST_NAME: backoffice.adesso.localhost
       API_TOKEN: 566f77f630e358ed9d14dfe2b0eb3d7e2b3ba7881e0e017fd256fba338895ce7
+      JWT_SECRET: ADESSO_JWT_SECRET_BACKOFFICE
     working_dir: /ws
     volumes:
       - ./:/ws
