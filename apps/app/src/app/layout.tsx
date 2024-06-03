@@ -3,8 +3,6 @@ import { App, Layout } from 'antd';
 
 import './global.css';
 import Header from '../_components/Header';
-import { cookies } from 'next/headers';
-import { detectUserLanguage } from '@adesso-exercise/commons';
 
 export const metadata = {
   title: 'App',

@@ -1,7 +1,7 @@
 'use server'
 
 import createUserMutation from './graphql/createUserMutation';
-import { doGoRestRequest, login, logout } from '@adesso-exercise/commons';
+import { doGoRestRequest, login, logout, changeUserLanguage } from '@adesso-exercise/commons';
 import { RegisterFieldType } from '../app/register/page';
 import { redirect } from 'next/navigation';
 import { NewPostFieldType } from '../_components/NewPostForm';
@@ -100,6 +100,11 @@ export async function editProfile(_: any, formData: EditProfileFieldType) {
         id: parseInt(formData.id, 10)
       }
     });
-  console.log(resp)
   redirect('/profile');
+}
+
+export async function changeUserLocale() {
+  console.log('change language');
+  await changeUserLanguage();
+  redirect('/');
 }

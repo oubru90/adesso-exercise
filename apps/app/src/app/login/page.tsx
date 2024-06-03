@@ -8,13 +8,15 @@ import InputPassword from 'antd/lib/input/Password';
 import Title from 'antd/lib/typography/Title';
 
 import { loginUser } from '../../lib/actions';
+import { getDictionary } from '../dictionaries';
 
 export type LoginFieldType = {
   id: string;
   password?: string;
 };
 
-export default function Login() {
+export default async function Login() {
+  const dictionary = await getDictionary();
   const [errorMessage, dispatch] = useFormState(loginUser, undefined)
   const { pending } = useFormStatus();
 
@@ -23,7 +25,7 @@ export default function Login() {
       <Row style={{ width: "100%" }}>
         <Col xs={{ span: 20, offset: 2 }} md={{ span: 12, offset: 6 }}>
           <Card>
-            <Title level={2}>Login</Title>
+            <Title level={2}>{dictionary.login.title}</Title>
             {errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null}
             <Form
               disabled={pending}
@@ -36,7 +38,7 @@ export default function Login() {
               onFinish={(formData) => dispatch(formData)}
             >
               <FormItem<LoginFieldType>
-                label="User ID (ex: 6942526)"
+                label={`${dictionary.login.userID} (ex: 6942526)`}
                 name="id"
                 rules={[{ required: true, message: 'Please input your user ID!' }]}
               >

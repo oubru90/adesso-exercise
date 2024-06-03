@@ -1,0 +1,11 @@
+.header {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ad4e00 !important;
+}

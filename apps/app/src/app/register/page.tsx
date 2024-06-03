@@ -9,7 +9,6 @@ import RadioButton from 'antd/lib/radio/radioButton';
 import Title from 'antd/lib/typography/Title';
 
 import { register } from '../../lib/actions';
-import { getDictionary } from '../dictionaries';
 
 export type RegisterFieldType = {
   email?: string;

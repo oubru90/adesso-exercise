@@ -1,5 +1,4 @@
-import { cookies } from 'next/headers'
-import 'server-only'
+import { getUserLanguage } from '@adesso-exercise/commons';
 
 type locales = 'en' | 'it';
 
@@ -9,6 +8,6 @@ const dictionaries = {
 }
 
 export const getDictionary = async () => {
-  const locale: locales = cookies().get("lang")?.value as locales || 'en';
+  const locale = await getUserLanguage() as locales;
   return dictionaries[locale]()
 }

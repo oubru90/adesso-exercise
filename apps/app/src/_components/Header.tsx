@@ -1,12 +1,19 @@
+'use client';
+
 import { getSession } from "@adesso-exercise/commons";
 import { Button, Form, Space } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import { logoutUser } from "../lib/actions";
 
 import styles from './Header.module.css';
+import { getDictionary } from "../app/dictionaries";
+import ChangeLanguageButton from "./ChangeLanguageButton";
 
 export default async function PageHeader() {
   const user = await getSession();
+  const dictionary = await getDictionary();
+
+  console.log(dictionary);
 
   return (
     <Header className={styles.header} >
@@ -18,13 +25,11 @@ export default async function PageHeader() {
         </a>
       </div>
       <div style={{ marginLeft: 'auto' }}>
-        <Button type="text" href="/profile" style={{ color: 'white' }}>
-          Profile
-        </Button>
+        <ChangeLanguageButton />
         {user && (
           <Space>
             <Button type="text" href="/profile" style={{ color: 'white' }}>
-              Profile
+              {dictionary.header.profie}
             </Button>
             <Form onFinish={logoutUser}>
               <Button
@@ -32,7 +37,7 @@ export default async function PageHeader() {
                 type="text"
                 style={{ color: 'white' }}
               >
-                Logout
+                {dictionary.header.logout}
               </Button>
             </Form>
           </Space>
