@@ -18,9 +18,7 @@ Frontend
 - jose, for JWT tokens management
 
 ## Getting started
-There are two methods to start the local development environment.
 
-### With Docker
 Go to root folder and run:
 ```
 docker-compose run npm 
@@ -41,4 +39,27 @@ If you don't use chrome or similar you probably should add the following lines i
 or alternatively use [localhost:3000](http://localhost:3000) and [localhost:3001](http://localhost:3001).
 
 ## Apps details
+
+### App
+A quick list of features:
+- Login
+- Logout
+- Profile page
+- Edit profile info
+- Delete user
+- List of logged user posts
+- Create new post
+- Post details page with comments
+- Localization IT / EN
+
+This app communicates with the GoRest service using the GraphQL APIs.  
+
+### Backoffice
+A quick list of features:
+- Login only with admin/admin
+- Logout
+- All users paginated list
+- Block user
+
+This app communicates the GoRest service using the REST APIs.
 

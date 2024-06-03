@@ -1,8 +1,7 @@
 import { getSession } from "@adesso-exercise/commons";
-import { Button, Form } from "antd";
 import { Header } from "antd/lib/layout/layout";
 
-import styles from './Header.module.css';
+import styles from './PageHeader.module.css';
 import LogoutButton from "./LogoutButton";
 
 export default async function PageHeader() {

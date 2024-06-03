@@ -7,6 +7,7 @@ import ListItem, { Meta } from "antd/lib/list/Item";
 import Paragraph from "antd/lib/typography/Paragraph";
 import DeletePostButton from "../../_components/DeletePostButton";
 import { EditOutlined, ShareAltOutlined } from "@ant-design/icons";
+import SharePostButton from "../../_components/SharePostButton";
 
 export default async function PostDetail({ params }: { params: { post: string } }) {
   const postDetails: PostDetailsResponse = await doGoRestRequest(postDetailsQuery, { id: params.post });
@@ -19,9 +20,7 @@ export default async function PostDetail({ params }: { params: { post: string } 
             title={postDetails.post.title}
             actions={[
               <DeletePostButton id={postDetails.post.id} />,
-              <Button type="text" icon={<ShareAltOutlined />}>
-                Share
-              </Button>
+              <SharePostButton post={postDetails.post} />
             ]}
           >
             <Paragraph >

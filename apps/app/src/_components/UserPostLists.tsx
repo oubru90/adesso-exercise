@@ -8,6 +8,7 @@ import Paragraph from "antd/lib/typography/Paragraph";
 import DeletePostButton from "./DeletePostButton";
 
 import Text from "antd/lib/typography/Text";
+import SharePostButton from "./SharePostButton";
 
 interface UserPostsListProps {
   posts: Post[];
@@ -21,9 +22,7 @@ export default function UserPostsList({ posts }: UserPostsListProps) {
           key={post.id}
           actions={[
             <DeletePostButton id={post.id} />,
-            <Button type="text" icon={<ShareAltOutlined />}>
-              Share
-            </Button>,
+            <SharePostButton post={post} />
           ]}
         >
           <a href={`/${post.id}`}>
