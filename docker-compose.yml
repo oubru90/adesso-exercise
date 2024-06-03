@@ -1,13 +1,6 @@
 version: '3.7'
 
 services:
-  nginxproxy:
-    image: nginxproxy/nginx-proxy
-    ports:
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-
   app-frontend:
     image: node:21.7.3
     command: npx nx dev app
@@ -21,8 +14,6 @@ services:
     working_dir: /ws
     volumes:
       - ./:/ws
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
 
   backoffice-frontend:
     image: node:21.7.3
@@ -37,5 +28,11 @@ services:
     working_dir: /ws
     volumes:
       - ./:/ws
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+
+  npm:
+    image: node:21.7.3
+    command: npm ci
+    container_name: npm
+    working_dir: /ws
+    volumes:
+      - ./:/ws

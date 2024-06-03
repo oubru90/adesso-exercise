@@ -16,9 +16,6 @@ export default async function LoginForm() {
       <Form
         layout="vertical"
         name="login"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
         autoComplete="off"
         onFinish={async (formData) => {
           "use server";

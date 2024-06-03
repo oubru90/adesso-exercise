@@ -1,1 +1,0 @@
-# Scuratti - Adesso exercise
