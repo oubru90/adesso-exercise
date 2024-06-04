@@ -56,6 +56,11 @@ A quick list of features:
 This app communicates with the GoRest service using the GraphQL APIs.  
 All the mutations requests are made with the Nextjs Server Actions.
 
+__Main problems__:  
+1. No loading states UI during mutations
+2. Errors difficult to handle
+
+
 ### Backoffice
 A quick list of features:
 - Login only with admin/admin
