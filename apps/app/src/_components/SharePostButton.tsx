@@ -3,7 +3,7 @@ import { Post } from '@adesso-exercise/commons';
 import { ShareAltOutlined } from '@ant-design/icons';
 import { App, Button } from 'antd';
 
-export default function SharePostButton({ post }: { post: Post }) {
+export default function SharePostButton({ post, children }: { post: Post, children: React.ReactNode }) {
   const { message } = App.useApp();
   return (
     <Button
@@ -14,7 +14,7 @@ export default function SharePostButton({ post }: { post: Post }) {
       type="text"
       icon={<ShareAltOutlined />}
     >
-      Share
+      {children}
     </Button>
   )
 }

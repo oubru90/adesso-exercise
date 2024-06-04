@@ -12,17 +12,25 @@ import SharePostButton from "./SharePostButton";
 
 interface UserPostsListProps {
   posts: Post[];
+  dict: any;
 }
 
-export default function UserPostsList({ posts }: UserPostsListProps) {
+export default function UserPostsList({ posts, dict }: UserPostsListProps) {
   return (
     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
       {posts.map(post => (
         <Card
           key={post.id}
           actions={[
-            <DeletePostButton id={post.id} />,
-            <SharePostButton post={post} />
+            <DeletePostButton
+              disabled={false}
+              id={post.id}
+            >
+              {dict.post.delete}
+            </DeletePostButton>,
+            <SharePostButton post={post}>
+              {dict.post.share}
+            </SharePostButton>
           ]}
         >
           <a href={`/${post.id}`}>
@@ -33,7 +41,7 @@ export default function UserPostsList({ posts }: UserPostsListProps) {
             <Space direction="vertical">
               <Paragraph ellipsis={{ rows: 2 }}>{post.body}</Paragraph>
               <Text>
-                <CommentOutlined /> {post.comments.totalCount} Comments
+                <CommentOutlined /> {post.comments.totalCount} {dict.post.comments}
               </Text>
             </Space>
           </a>

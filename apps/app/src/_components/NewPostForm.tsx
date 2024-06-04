@@ -12,14 +12,15 @@ export type NewPostFieldType = {
   body?: string;
 };
 
-export default function NewPostForm({ userId }: { userId: number }) {
+export default function NewPostForm({ userId, dict }: { userId: number, dict: any }) {
+  const [form] = Form.useForm();
   const [errorMessage, dispatch] = useFormState(createNewPost, undefined)
   const { pending } = useFormStatus();
 
   return (
     <Card
       loading={pending}
-      title="New post"
+      title={dict.home.newPost}
       bordered={false}
       actions={[
         <Button
@@ -27,27 +28,31 @@ export default function NewPostForm({ userId }: { userId: number }) {
           form="newPostForm"
           icon={<SendOutlined />}
         >
-          Send
+          {dict.home.send}
         </Button>
       ]}
     >
       {errorMessage ? <Alert message={errorMessage} type="error" showIcon /> : null}
       <Form
+        form={form}
         id="newPostForm"
         layout="vertical"
-        onFinish={dispatch}
+        onFinish={async (formData) => {
+          await dispatch(formData);
+          form.resetFields();
+        }}
       >
         <FormItem hidden name="userId" initialValue={userId} />
         <FormItem<NewPostFieldType>
           name="title"
-          label="Title"
+          label={dict.home.title}
           rules={[{ required: true, message: 'Please insert title' }]}
         >
           <Input />
         </FormItem>
         <FormItem<NewPostFieldType>
           name="body"
-          label="Text"
+          label={dict.home.text}
           rules={[
             { max: 500, message: 'Max 500 characters' },
             { required: true, message: 'Please insert text' }

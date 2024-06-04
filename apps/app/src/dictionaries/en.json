@@ -1,6 +1,9 @@
 {
+  "errors": {
+    "404": "Page not found"
+  },
   "header": {
-    "profie": "Profile",
+    "profile": "Profile",
     "logout": "Logout"
   },
   "login": {
@@ -8,15 +11,35 @@
     "userID": "User ID",
     "password": "Password",
     "register": "Register",
-    "login": "Login"
+    "login": "Login",
+    "userIDRequired": "Please input your user ID!",
+    "passwordRequired": "Please input your password!"
   },
-  "register": {
+  "profile": {
     "title": "Register",
+    "userID": "User ID",
     "name": "Name",
     "email": "Email",
     "gender": "Gender",
     "male": "Male",
     "female": "Female",
-    "register": "Register"
+    "register": "Register",
+    "deleteUserMessage": "Are you sure you want to delete your account?",
+    "deleteUser": "Delete account",
+    "save": "Save"
+  },
+  "home": {
+    "hello": "Hello",
+    "newPost": "New post",
+    "title": "Title",
+    "text": "Text",
+    "send": "Send",
+    "yourPosts": "Your posts"
+  },
+  "post": {
+    "comments": "Comments",
+    "delete": "Delete",
+    "share": "Share",
+    "urlCopied": "URL copied to clipboard"
   }
 }

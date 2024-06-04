@@ -4,13 +4,14 @@ import FormItem from 'antd/lib/form/FormItem';
 import InputPassword from 'antd/lib/input/Password';
 import { loginUser } from '../lib/actions';
 import { redirect } from 'next/navigation';
+import { Locale } from '../app/[lang]/dictionaries';
 
 export type LoginFieldType = {
   id: string;
   password?: string;
 };
 
-export default async function LoginForm() {
+export default async function LoginForm({ dict, lang }: { dict: any, lang: Locale }) {
   return (
     <Space direction="vertical" style={{ width: "100%" }}>
       <Form
@@ -24,9 +25,9 @@ export default async function LoginForm() {
         }}
       >
         <FormItem<LoginFieldType>
-          label={`User ID (ex: 6942526)`}
+          label={`${dict.login.userID} (ex: 6942526)`}
           name="id"
-          rules={[{ required: true, message: 'Please input your user ID!' }]}
+          rules={[{ required: true, message: dict.login.userIDRequired }]}
         >
           <Input />
         </FormItem>
@@ -42,11 +43,11 @@ export default async function LoginForm() {
         <Flex justify={"space-between"}>
           <FormItem>
             <Button type="primary" htmlType="submit">
-              Login
+              {dict.login.login}
             </Button>
           </FormItem>
-          <Button type="link" href='/register'>
-            Register
+          <Button type="link" href={'/' + lang + '/register'} >
+            {dict.login.register}
           </Button>
         </Flex>
       </Form>

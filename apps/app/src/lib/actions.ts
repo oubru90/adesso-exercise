@@ -1,8 +1,8 @@
 'use server'
 
 import createUserMutation from './graphql/createUserMutation';
-import { doGoRestRequest, login, logout, changeUserLanguage } from '@adesso-exercise/commons';
-import { RegisterFieldType } from '../app/register/page';
+import { doGoRestRequest, login, logout } from '@adesso-exercise/commons';
+import { RegisterFieldType } from '../app/[lang]/register/page';
 import { redirect } from 'next/navigation';
 import { NewPostFieldType } from '../_components/NewPostForm';
 import createPostMutation from './graphql/createPostMutation';
@@ -15,13 +15,11 @@ import { LoginFieldType } from '../_components/LoginForm';
 
 export async function loginUser(_: any, formData: LoginFieldType) {
   try {
-    console.log('loginUser');
     const user = await doGoRestRequest(
       getUserQuery,
       {
         id: parseInt(formData.id, 10),
       });
-    console.log('user', user)
     if (!user?.user || user?.user?.status !== 'active') {
       throw new Error('Invalid user');
     }

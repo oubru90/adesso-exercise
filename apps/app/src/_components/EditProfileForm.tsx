@@ -6,7 +6,7 @@ import { Button, Card, Form, Input } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import RadioGroup from 'antd/lib/radio/group';
 import RadioButton from 'antd/lib/radio/radioButton';
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { editProfile } from "../lib/actions";
 import { User } from "@adesso-exercise/commons";
 
@@ -17,13 +17,11 @@ export interface EditProfileFieldType {
   gender: string
 }
 
-export default async function EditProfileForm({ user }: { user: User }) {
-  const [errorMessage, dispatch] = useFormState(editProfile, undefined)
-  const { pending } = useFormStatus();
+export default function EditProfileForm({ user, dict }: { user: User, dict: any }) {
+  const [errorMessage, dispatch] = useFormState(editProfile, undefined);
 
   return (
     <Card
-      title="Edit your profile"
       bordered={false}
       actions={[
         <Button
@@ -31,7 +29,7 @@ export default async function EditProfileForm({ user }: { user: User }) {
           form="editProfileForm"
           icon={<SaveOutlined />}
         >
-          Save
+          {dict.profile.save}
         </Button>
       ]}
     >
@@ -47,14 +45,14 @@ export default async function EditProfileForm({ user }: { user: User }) {
         initialValues={user}
       >
         <FormItem<EditProfileFieldType>
-          label="ID"
+          label={dict.profile.userID}
           name="id"
         >
           <Input disabled />
         </FormItem>
 
         <FormItem<EditProfileFieldType>
-          label="Email"
+          label={dict.profile.email}
           name="email"
           rules={[{ required: true, message: 'Please input your email!' }]}
         >
@@ -62,7 +60,7 @@ export default async function EditProfileForm({ user }: { user: User }) {
         </FormItem>
 
         <FormItem<EditProfileFieldType>
-          label="Name"
+          label={dict.profile.name}
           name="name"
           rules={[{ required: true, message: 'Please input your name!' }]}
         >
@@ -70,13 +68,13 @@ export default async function EditProfileForm({ user }: { user: User }) {
         </FormItem>
 
         <FormItem<EditProfileFieldType>
-          label="Gender"
+          label={dict.profile.gender}
           name="gender"
           rules={[{ required: true, message: 'Please select your gender!' }]}
         >
           <RadioGroup>
-            <RadioButton value="male">Male</RadioButton>
-            <RadioButton value="female">Female</RadioButton>
+            <RadioButton value="male">{dict.profile.male}</RadioButton>
+            <RadioButton value="female">{dict.profile.female}</RadioButton>
           </RadioGroup>
         </FormItem>
       </Form>

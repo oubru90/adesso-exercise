@@ -1,11 +1,11 @@
 'use client';
 
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Popconfirm } from "antd";
+import { Button, Popconfirm } from "antd";
 import { deletePost } from "../lib/actions";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
-export default function DeletePostButton({ id }: { id: number }) {
+export default function DeletePostButton({ id, disabled, children }: { id: number, disabled: boolean, children: React.ReactNode }) {
   const [errorMessage, dispatch] = useFormState(deletePost, undefined);
 
   return (
@@ -18,11 +18,12 @@ export default function DeletePostButton({ id }: { id: number }) {
       cancelText="No"
     >
       <Button
+        disabled={disabled}
         htmlType="submit"
         type="text"
         icon={<DeleteOutlined />}
       >
-        Delete
+        {children}
       </Button>
     </Popconfirm>
   )

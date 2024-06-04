@@ -3,7 +3,7 @@ import { Button, Form } from "antd";
 import { useFormState } from "react-dom";
 import { logoutUser } from "../lib/actions";
 
-export default async function LogoutButton() {
+export default function LogoutButton({ children }: { children: React.ReactNode }) {
   const [errorMessage, dispatch] = useFormState(logoutUser, undefined)
 
   return (
@@ -13,7 +13,7 @@ export default async function LogoutButton() {
         type="text"
         style={{ color: 'white' }}
       >
-        Logout
+        {children}
       </Button>
     </Form>
   )

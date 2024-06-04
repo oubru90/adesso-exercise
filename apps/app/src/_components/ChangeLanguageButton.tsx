@@ -1,21 +1,31 @@
 'use client';
-
-import { Button, Form } from "antd";
-import { useFormState } from "react-dom";
-import { changeUserLocale } from "../lib/actions";
+import { Button, Dropdown } from "antd";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default function ChangeLanguageButton() {
-  const [_, dispatch] = useFormState(changeUserLocale, undefined)
+  const pathName = usePathname();
+
+  const items = [
+    {
+      label: <a href={pathName.replace("/it", "/en")}>EN</a>,
+      key: 'en',
+    },
+    {
+      label: <a href={pathName.replace("/en", "/en")}>IT</a>,
+      key: 'it',
+    }
+  ];
 
   return (
-    <Form onFinish={dispatch}>
+    <Dropdown menu={{ items }} trigger={['click']}>
       <Button
         htmlType="submit"
         type="text"
         style={{ color: 'white' }}
       >
-        IT / EN
+        IT/EN
       </Button>
-    </Form>
+    </Dropdown>
   )
 }
