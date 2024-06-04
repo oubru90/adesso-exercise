@@ -103,9 +103,3 @@ export async function editProfile(_: any, formData: EditProfileFieldType) {
     });
   redirect('/profile');
 }
-
-export async function changeUserLocale() {
-  console.log('change language');
-  await changeUserLanguage();
-  redirect('/');
-}

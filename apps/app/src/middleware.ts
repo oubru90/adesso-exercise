@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
   if (pathnameHasLocale) {
     return;
   }
-  console.log("PATHNAME", pathname);
+
   request.nextUrl.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(request.nextUrl);
 }
