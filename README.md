@@ -39,6 +39,7 @@ If you don't use chrome or similar you probably should add the following lines i
 or alternatively use [localhost:3000](http://localhost:3000) and [localhost:3001](http://localhost:3001).
 
 ## Apps details
+Both applications are made with NextJs and using the "App router" feature for the routing, based on React Server components.
 
 ### App
 A quick list of features:
@@ -53,6 +54,7 @@ A quick list of features:
 - Localization IT / EN
 
 This app communicates with the GoRest service using the GraphQL APIs.  
+All the mutations requests are made with the Nextjs Server Actions.
 
 ### Backoffice
 A quick list of features:
@@ -61,5 +63,6 @@ A quick list of features:
 - All users paginated list
 - Block user
 
-This app communicates the GoRest service using the REST APIs.
-
+This app communicates with the GoRest service using the REST APIs.  
+The login flow is made with server actions (login/logout) and the nextjs middleware.  
+All the requests to the server API are made by client using the `fetch()` method, no additional library installed.
